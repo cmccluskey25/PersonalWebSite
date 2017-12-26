@@ -2,30 +2,91 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@*<div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
+
+<div id="border">
+   
+    <div id="screen" ></div>
+    <div id="masker1" >
+        <div id="copy1" ><div>Caroline </div><div >Mccluskey</div><div>Web Developer</div></div>
+        <div id="whiteCircle"></div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    <div id="copyDynamic"></div>
+    <div id="copy2"><div>Years </div><div>Experience</div></div>
 </div>
+<script>
+
+    eventOne();
+
+    function numbersToChange(_startString, _num, _endString) {
+        var container = document.getElementById('copyDynamic');
+        container.innerHTML = _startString + _num + _endString;
+
+    }
+
+    function eventOne() {
+        var tl = new TimelineLite();
+        var blocker = document.getElementById("screen");
+        var masker1 = document.getElementById("masker1");
+        var copy1lines = document.getElementById('copy1');
+        var copy2lines = document.getElementById('copy2');
+        var test = document.getElementById('test');
+        tl.to(blocker, .01, { opacity: 0 })
+        tl.from(masker1, 1.2, { css: { left: "50%", top: "50%", width: "0px", height: "0px" }, ease: Back.easeInOut }, 0.2)
+        tl.staggerFrom(copy1lines.childNodes, .5, { css: { top: "+=25px", opacity: "0" }, ease: Strong.easeOut }, 0.1)
+        tl.to(copy1lines, .5, { opacity: 0 }, 2.5)
+        tl.from(copyDynamic, .25, { css: { top: "+=50px", opacity: "0" } }, 3.4)
+        tl.from(copy2lines, .25, { css: { top: "+=50px", opacity: "0" } }, 3.5)
+        for (var i = 0; i <= 15; i++) {
+            tl.call(numbersToChange, ["", i, "%"]);
+            tl.add(TweenLite.delayedCall(.1, numbersToChange, ["", i, "%"]));
+        }
+        tl.to(copy2lines, .25, { opacity: 0 }, 6);
+       
+    }
+
+    function splitText(phrase) {
+        var prevLetter, sentence,
+            sentence = phrase.split("");
+        $.each(sentence, function (index, val) {
+            if (val === " ") {
+                val = "&nbsp;";
+            }
+            var letter = $("<div/>", {
+                id: "txt" + index
+            }).addClass('txt').html(val).appendTo(txtContainer);
+
+            if (prevLetter) {
+                $(letter).css("left", ($(prevLetter).position().left + $(letter).width()) + "px");
+            };
+            prevLetter = letter;
+        });
+        txt = $(".txt");
+    }
+</script>

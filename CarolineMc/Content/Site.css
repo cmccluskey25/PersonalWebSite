@@ -22,3 +22,375 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* stuff*/
+@font-face {
+    font-family: "Neue Haas Grotesk";
+    src: url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplay.ttf') format('ttf'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplay.woff') format('woff'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplay.woff2') format('woff2'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplay.svg') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Neue Haas Grotesk Medium";
+    src: url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaymedium.ttf') format('ttf'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaymedium.woff') format('woff'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaymedium.woff2') format('woff2'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaymedium.svg') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Neue Haas Grotesk Bold";
+    src: url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaybold.ttf') format('ttf'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaybold.woff') format('woff'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaybold.woff2') format('woff2'), url('https://cdde858ebed93488811f-4a840a140d7caee3c01f302484ec5d42.ssl.cf2.rackcdn.com/Fonts/neuehaasgroteskdisplaybold.svg') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    height: 600px;
+    line-height: 1.2;
+    font-size: 27px;
+    letter-spacing: .4;
+    color: #CD040B;
+    font-family: "Neue Haas Grotesk", Arial, sans-serif;
+    /*font-weight: 800;*/ /*BOLD-800, MEDIUM-600, ROMAN - 400*/
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+sup {
+    font-size: 50%;
+}
+
+#border {
+    position: relative;
+    width: 300px;
+    height: 600px;
+    /*width: 50%;
+    height: 50%;*/
+    border: 1px solid #000;
+    background-color: #E7E7E7;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+    #border:hover #cta {
+        background-color: #666666;
+    }
+
+#screen {
+    z-index: 300;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #fff;
+}
+
+#copy1 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 40px;
+    line-height: 41px;
+    letter-spacing: .8px;
+    left: 230px;
+    top: 283px;
+    opacity: 1;
+}
+
+.copy1 div {
+    position: relative;
+}
+
+#whiteCircle {
+    width: 670px;
+    height: 670px;
+    background-color: #ffffff;
+    opacity: 1;
+}
+
+
+
+#masker1 {
+    width: 670px;
+    height: 670px;
+    left: -180px;
+    top: -40px;
+    position: absolute;
+    border-radius: 300px;
+    overflow: hidden;
+    opacity: 1;
+}
+
+#copyDynamic {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 57px;
+    line-height: 39px;
+    letter-spacing: 2px;
+    left: 42px;
+    top: 250px;
+    opacity: 1;
+}
+
+#copy2 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 39px;
+    line-height: auto;
+    letter-spacing: -.8px;
+    left: 42px;
+    top: 290px;
+    opacity: 1;
+}
+
+#copy3 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 39px;
+    line-height: 42px;
+    letter-spacing: -.8px;
+    left: 42px;
+    top: 215px;
+    opacity: 1;
+}
+
+#copy3sub {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Medium", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 17px;
+    color: #000;
+    line-height: 30px;
+    letter-spacing: .5px;
+    left: 42px;
+    top: 465px;
+    opacity: 1;
+}
+
+#copy3disc {
+    position: absolute;
+    font-family: "Neue Haas Grotesk", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 9px;
+    color: #000;
+    line-height: 11px;
+    letter-spacing: -.2px;
+    left: 15px;
+    bottom: 15px;
+    opacity: 1;
+}
+
+#copy4 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 39px;
+    line-height: 42px;
+    letter-spacing: -.8px;
+    left: 40px;
+    top: 210px;
+    opacity: 1;
+}
+
+#copy4sub {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Medium", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 17px;
+    color: #000;
+    line-height: 17px;
+    letter-spacing: .5px;
+    left: 40px;
+    top: 355px;
+    opacity: 1;
+}
+
+#copy5 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 34px;
+    line-height: 35px;
+    letter-spacing: 1.5px;
+    left: 270px;
+    top: 270px;
+    opacity: 1;
+}
+
+#copy6 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Medium", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 27px;
+    top: 110px;
+    left: 42px;
+    color: #000000;
+    letter-spacing: 1px;
+    opacity: 1;
+}
+
+#copy7 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Medium", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 18px;
+    top: 4px;
+    left: 9px;
+    color: #000000;
+    opacity: 1;
+}
+
+#copy8 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 52px;
+    letter-spacing: 2px;
+    top: 243px;
+    left: 65px;
+    opacity: 1;
+}
+
+#copy9 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 26px;
+    top: 255px;
+    right: 35px;
+    color: #000000;
+    opacity: 1;
+}
+
+#copy10 {
+    position: absolute;
+    font-family: "Neue Haas Grotesk", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: .2px;
+    top: 310px;
+    left: 42px;
+    color: #000000;
+    opacity: 1;
+}
+
+#masker2 {
+    width: 670px;
+    height: 670px;
+    left: -180px;
+    top: -40px;
+    position: absolute;
+    border-radius: 300px;
+    -moz-border-radius: 300px;
+    -webkit-border-radius: 300px;
+    overflow: hidden;
+    opacity: 1;
+}
+
+#logo {
+    position: absolute;
+    width: 80px;
+    top: 30px;
+    left: 41px;
+    opacity: 1;
+}
+
+
+#cta {
+    width: 214px;
+    height: 41px;
+    background-color: #CD040B;
+    position: absolute;
+    left: 41px;
+    bottom: 165px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 250%;
+    letter-spacing: .5;
+    opacity: 1;
+}
+
+#ctaCopy {
+    position: absolute;
+    font-size: 19px;
+    left: 65px;
+    bottom: -1px;
+}
+
+#cyanCircle {
+    width: 300px;
+    height: 250px;
+    background-color: #89D8F8;
+    opacity: 1;
+}
+
+#maskerPrice {
+    width: 29px;
+    height: 29px;
+    left: 42px;
+    top: 245px;
+    position: absolute;
+    border-radius: 35px;
+    -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    overflow: hidden;
+    opacity: 1;
+    z-index: 100;
+}
+
+#legal {
+    z-index: 600;
+}
+
+#legalCopy {
+    position: absolute;
+    font-family: "Neue Haas Grotesk", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 13px;
+    letter-spacing: .3;
+    color: #000;
+    width: 300px;
+    height: 180px;
+    bottom: -180px;
+    background-color: #ffffff;
+    z-index: 600;
+}
+
+    #legalCopy p {
+        font-family: "Neue Haas Grotesk", Arial, sans-serif;
+        font-weight: 400;
+        position: absolute;
+        width: 290px;
+        top: 10px;
+        left: 10px;
+        z-index: 600;
+    }
+
+#legalTag {
+    font-size: 12px;
+    color: #000;
+    opacity: 0;
+    font-family: "Neue Haas Grotesk Medium", Arial, sans-serif;
+    font-weight: 600;
+    position: absolute;
+    text-decoration: none;
+    left: 41px;
+    bottom: 8px;
+    z-index: 600;
+}
