@@ -1,44 +1,19 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-@*<div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@
-
 <div id="border">
-   
-    <div id="screen" ></div>
-    <div id="masker1" >
-        <div id="copy1" ><div>Caroline </div><div >Mccluskey</div><div>Web Developer</div></div>
+    <div id="screen"></div>
+    <div id="masker1">
+
         <div id="whiteCircle"></div>
     </div>
-    <div id="copyDynamic"></div>
-    <div id="copy2"><div>Years </div><div>Experience</div></div>
+    <div id="copy1Container">
+        <div id="copy1"><div class="stagger-up">Caroline </div><div class="stagger-up">McCluskey</div><div class="stagger-up">Web Developer</div></div>
+    </div>
+    <div id="copy2Container">
+        <div id="copyDynamic"></div>
+        <div id="copy2"><div>Years </div><div>Experience</div></div>
+    </div>
 </div>
 <script>
 
@@ -54,12 +29,16 @@
         var tl = new TimelineLite();
         var blocker = document.getElementById("screen");
         var masker1 = document.getElementById("masker1");
+        var copy1Container = document.getElementById('copy1Container');
         var copy1lines = document.getElementById('copy1');
         var copy2lines = document.getElementById('copy2');
         var test = document.getElementById('test');
         tl.to(blocker, .01, { opacity: 0 })
         tl.from(masker1, 1.2, { css: { left: "50%", top: "50%", width: "0px", height: "0px" }, ease: Back.easeInOut }, 0.2)
-        tl.staggerFrom(copy1lines.childNodes, .5, { css: { top: "+=25px", opacity: "0" }, ease: Strong.easeOut }, 0.1)
+        //tl.from(copy1Container, .25, { css: { top: "+=50px", opacity: "0" } }, 3.5)
+        ////tl.staggerFrom('.stagger-up', .5, { css: { top: "+=25px", opacity: "0" }, ease: Strong.easeOut }, 0.1)
+        tl.staggerFrom('.stagger-up', .5, { css: { y: "100", opacity: "0" }, ease: Strong.easeOut }, 0.1)
+
         tl.to(copy1lines, .5, { opacity: 0 }, 2.5)
         tl.from(copyDynamic, .25, { css: { top: "+=50px", opacity: "0" } }, 3.4)
         tl.from(copy2lines, .25, { css: { top: "+=50px", opacity: "0" } }, 3.5)
@@ -67,8 +46,9 @@
             tl.call(numbersToChange, ["", i, "%"]);
             tl.add(TweenLite.delayedCall(.1, numbersToChange, ["", i, "%"]));
         }
+        tl.to(copyDynamic, .25, { opacity: 0 }, 6);
         tl.to(copy2lines, .25, { opacity: 0 }, 6);
-       
+
     }
 
     function splitText(phrase) {

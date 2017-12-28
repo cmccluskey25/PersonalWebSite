@@ -1,4 +1,9 @@
-﻿body {
+﻿html, body, .container{
+    height:100%;
+    width:100%;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -50,11 +55,13 @@ textarea {
 body {
     margin: 0;
     padding: 0;
-    width: 300px;
-    height: 600px;
+    /*width: 300px;
+    height: 600px;*/
+    /*width: 100%;
+    height: 100%;*/
     line-height: 1.2;
     font-size: 27px;
-    letter-spacing: .4;
+    letter-spacing: normal;
     color: #CD040B;
     font-family: "Neue Haas Grotesk", Arial, sans-serif;
     /*font-weight: 800;*/ /*BOLD-800, MEDIUM-600, ROMAN - 400*/
@@ -72,15 +79,18 @@ sup {
 
 #border {
     position: relative;
-    width: 300px;
-    height: 600px;
-    /*width: 50%;
-    height: 50%;*/
+    /*width: 300px;
+    height: 600px;*/
+    width: 100%;
+    height: 100%;
+    /*bottom:0;*/
     border: 1px solid #000;
     background-color: #E7E7E7;
     overflow: hidden;
     cursor: pointer;
     box-sizing: border-box;
+
+    text-align:center;
 }
 
     #border:hover #cta {
@@ -95,41 +105,82 @@ sup {
     background-color: #fff;
 }
 
-#copy1 {
+#masker1 {
+    /*width: 670px;
+    height: 670px;*/
+    width: 600%;
+    /*height: 50%;*/
+    /*left: -180px;
+    top: -40px;*/
+    left: -150%;
+    top: -150%;
     position: absolute;
-    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
-    font-weight: 75;
-    font-size: 40px;
-    line-height: 41px;
-    letter-spacing: .8px;
-    left: 230px;
-    top: 283px;
+    /*border-radius: 300px;*/
+    border-radius: 50%;
+    overflow: hidden;
     opacity: 1;
+    background-color: #ffffff;
 }
 
-.copy1 div {
-    position: relative;
-}
+    #masker1:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
 
 #whiteCircle {
-    width: 670px;
-    height: 670px;
+    /*width: 670px;
+    height: 670px;*/
+    /*width: 200%;
+    height: 200%;*/
     background-color: #ffffff;
     opacity: 1;
 }
 
-
-
-#masker1 {
-    width: 670px;
-    height: 670px;
-    left: -180px;
-    top: -40px;
-    position: absolute;
-    border-radius: 300px;
-    overflow: hidden;
-    opacity: 1;
+#copy1Container {
+    position: relative;
+    font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 40px;
+    /*line-height: 41px;*/
+    letter-spacing: .8px;
+    display: flex;
+    align-items: center;
+    height:100%;
+    margin-right:auto;
+    margin-left:auto;
 }
+
+#copy1 {
+    position: relative;
+    /*font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
+    font-weight: 75;
+    font-size: 40px;
+    line-height: 41px;
+    letter-spacing: .8px;*/
+    /*left: 230px;
+    top: 283px;*/
+    /*left: 50%;
+    top: 50%;*/
+    /*width: 200%;
+    height: 200%;*/
+    opacity: 1;
+    text-align: center;
+    /*padding-top: 10%;
+    padding-bottom: 10%;*/
+    width:100%;
+}
+
+#copy1Container div {
+    position: relative;
+    display:block;
+}
+
+
+
+
+
+
 
 #copyDynamic {
     position: absolute;
