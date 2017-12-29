@@ -9,11 +9,16 @@
     </div>
     <div id="copy1Container">
         <div id="copy1"><div class="stagger-up">Caroline </div><div class="stagger-up">McCluskey</div><div class="stagger-up">Web Developer</div></div>
+        <div id="copy2Container" class="hidden" >
+            <div id="copyDynamic"></div>
+            <div id="copy2"><div>Years</div><div>Development</div><div>Experience</div></div>
+        </div>
+        <div id="copy3Container" class="hidden">
+            <div id="copyDynamic2"></div>
+            <div id="copy3"><div>Years</div><div>Web</div><div>Experience</div></div>
+        </div>
     </div>
-    <div id="copy2Container">
-        <div id="copyDynamic"></div>
-        <div id="copy2"><div>Years </div><div>Experience</div></div>
-    </div>
+    
 </div>
 <script>
 
@@ -25,29 +30,66 @@
 
     }
 
+    function numbersToChange2(_startString, _num, _endString) {
+        var container = document.getElementById('copyDynamic2');
+        container.innerHTML = _startString + _num + _endString;
+
+    }
+
     function eventOne() {
-        var tl = new TimelineLite();
+        var tl = new TimelineMax();
         var blocker = document.getElementById("screen");
         var masker1 = document.getElementById("masker1");
         var copy1Container = document.getElementById('copy1Container');
+        var copy2Container = document.getElementById('copy2Container');
+        var copy3Container = document.getElementById('copy3Container');
         var copy1lines = document.getElementById('copy1');
         var copy2lines = document.getElementById('copy2');
+        var copy3lines = document.getElementById('copy3');
+        var copyDynamic2 = document.getElementById('copyDynamic2');
         var test = document.getElementById('test');
         tl.to(blocker, .01, { opacity: 0 })
         tl.from(masker1, 1.2, { css: { left: "50%", top: "50%", width: "0px", height: "0px" }, ease: Back.easeInOut }, 0.2)
         //tl.from(copy1Container, .25, { css: { top: "+=50px", opacity: "0" } }, 3.5)
         ////tl.staggerFrom('.stagger-up', .5, { css: { top: "+=25px", opacity: "0" }, ease: Strong.easeOut }, 0.1)
         tl.staggerFrom('.stagger-up', .5, { css: { y: "100", opacity: "0" }, ease: Strong.easeOut }, 0.1)
-
-        tl.to(copy1lines, .5, { opacity: 0 }, 2.5)
-        tl.from(copyDynamic, .25, { css: { top: "+=50px", opacity: "0" } }, 3.4)
-        tl.from(copy2lines, .25, { css: { top: "+=50px", opacity: "0" } }, 3.5)
+         tl.to(masker1, .5, {css:{left:"50%", top:"50%", width:"1px", height:"1px"}, ease:Back.easeIn}, 3)
+        //tl.to(copy1lines, .5, { opacity: 0 }, 2.5)
+        //tl.to(copy1lines, .5, { visibility:hidden}, 2.5)
+        tl.call(function () {
+            $('#copy1').addClass("hidden");
+        }, null, null, 2);
+        tl.call(function () {
+            $('#copy2Container').removeClass("hidden");
+        }, null, null, 2);
+        //tl.set(copy2Container,{ autoalpha:1, display: block })
+        //tl.from(copyDynamic, .25, { css: { top: "+=50px", opacity: "0" } }, 3.4)
+        //tl.from(copy2lines, .25, { css: { top: "+=50px", opacity: "0" } }, 3.5)
+        tl.from(copyDynamic, .25, { css: { y: "50", opacity: "0" } }, 3.4)
+        tl.from(copy2lines, .25, { css: { y: "50", opacity: "0" } }, 3.5)
         for (var i = 0; i <= 15; i++) {
-            tl.call(numbersToChange, ["", i, "%"]);
-            tl.add(TweenLite.delayedCall(.1, numbersToChange, ["", i, "%"]));
+            tl.call(numbersToChange, ["", i, ""]);
+            tl.add(TweenLite.delayedCall(.1, numbersToChange, ["", i, ""]));
         }
         tl.to(copyDynamic, .25, { opacity: 0 }, 6);
         tl.to(copy2lines, .25, { opacity: 0 }, 6);
+
+        tl.to(masker1, 1.2, { css: { width: "600%",height:"auto", left: "-150%", top: " -150%" }, ease: Back.easeInOut })
+        tl.call(function () {
+            $('#copy2Container').addClass("hidden");
+        }, null, null);
+        tl.call(function () {
+            $('#copy3Container').removeClass("hidden");
+        }, null, null);
+        
+        tl.from(copyDynamic2, .25, { css: { y: "50", opacity: "0" } })
+        tl.from(copy3lines, .25, { css: { y: "50", opacity: "0" } })
+        for (var i = 0; i <= 8; i++) {
+            tl.call(numbersToChange2, ["", i, ""]);
+            tl.add(TweenLite.delayedCall(.1, numbersToChange2, ["", i, ""]));
+        }
+        tl.to(copyDynamic2, .25, { opacity: 0 }, 6);
+        tl.to(copy3lines, .25, { opacity: 0 }, 6);
 
     }
 

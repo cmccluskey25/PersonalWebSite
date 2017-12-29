@@ -151,8 +151,8 @@ sup {
     margin-left:auto;
 }
 
-#copy1 {
-    position: relative;
+#copy1, #copy2Container, #copy3Container {
+    /*position: relative;*/
     /*font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
     font-weight: 75;
     font-size: 40px;
@@ -171,42 +171,44 @@ sup {
     width:100%;
 }
 
-#copy1Container div {
+#copy1 div {
     position: relative;
     display:block;
+}
+
+.hidden{
+    display:none;
 }
 
 
 
 
 
-
-
-#copyDynamic {
-    position: absolute;
+#copyDynamic, #copyDynamic2 {
+    /*position: absolute;*/
     font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
     font-weight: 75;
     font-size: 57px;
     line-height: 39px;
     letter-spacing: 2px;
-    left: 42px;
-    top: 250px;
+    /*left: 42px;
+    top: 250px;*/
     opacity: 1;
 }
 
-#copy2 {
-    position: absolute;
+#copy2, #copy3 {
+    /*position: absolute;*/
     font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
     font-weight: 75;
     font-size: 39px;
     line-height: auto;
     letter-spacing: -.8px;
-    left: 42px;
-    top: 290px;
+    /*left: 42px;
+    top: 290px;*/
     opacity: 1;
 }
 
-#copy3 {
+/*#copy3 {
     position: absolute;
     font-family: "Neue Haas Grotesk Bold", Arial, sans-serif;
     font-weight: 75;
@@ -216,7 +218,7 @@ sup {
     left: 42px;
     top: 215px;
     opacity: 1;
-}
+}*/
 
 #copy3sub {
     position: absolute;
