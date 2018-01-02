@@ -1,0 +1,46 @@
+﻿skill,category,level
+.Net,Development,100
+c#,Development,100
+Webforms,Development,100
+MVC,Development,60
+SQL Server,Development,100
+Windows Services,Development,70
+nHibernate,Development,80
+OData,Development,30
+WCF,Development,50
+Linq To SQL,Development,50
+SimpleData,Development,30
+Dapper,Development,30
+CSS,Development,70
+NUnit,Development,80
+Sharp Architecture,Development,60
+TFS/VSTS,Development,100
+Visual Source Safe,Development,100
+Tortoise SVN,Development,100
+Scrumworks,Development,80
+Resharper,Development,100
+Infopath,Development,100
+Crystal Reports,Development,100
+Sharepoint,Development,80
+Visual Studio,Development,100
+SSIS,Development,50
+SSRS,Development,80
+Winforms,Development,100
+JQuery,Development,80
+JQuery UI,Development,60
+Web API,Development,50
+Javascript,Development,70
+AJAX,Development,80
+LINQ,Development,100
+HTML,Development,100
+OAuth,Development,50
+Entity Framework,Development,30
+Rhino Mocks,Development,60
+Umbraco,Development,10
+XML,Development,100
+Izenda Reporting,Development,80
+Subversion,Development,100
+Basecamp,Development,30
+Redgate Tools,Development,50
+PGP Encryption,Development,30
+Visual Basic 6,Development,100
