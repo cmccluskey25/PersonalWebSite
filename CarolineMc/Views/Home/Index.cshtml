@@ -17,9 +17,7 @@
             <div id="copyDynamic2"></div>
             <div id="copy3"><div>Years</div><div>Web</div><div>Experience</div></div>
         </div>
-        <div id="chart" ><svg></svg></div>
-        
-    </div>
+        <div id="chart" ><svg ></svg></div>    </div>
    
     <div id="test"></div>
 
@@ -29,21 +27,81 @@
     var bubbleChart = function () {
         var width = 960,
             height = 960,
-            maxRadius = 6,
+            maxRadius = 25,
             columnForColors = "category",
             columnForRadius = "level",
-            strength=-50;
-        var centerX = width * 0.5;
-        var centerY = height * 0.5;
+            strength = 0.05; // + Attracts. - Repels
 
-        var forceCollide = d3.forceCollide(function (d) { return d.r + 1 });
+        
+        //var centerX = width * 0.5;
+        //var centerY = height * 0.5;
+
+        //var forceCollide = d3.forceCollide(function (d) { return d.r + 1 });
+        //var forceCollide = d3.forceCollide().radius(function (d) {
+        //    return scaleRadius(d[columnForRadius]);
+        //});
+
+        //function chart(selection)
+        //{
+        //    var width = 960, height = 960
+
+        //    var numNodes = 100
+        //    var nodes = d3.range(numNodes).map(function (d) {
+        //        return { radius: Math.random() * 25 }
+        //    })
+
+        //    var simulation = d3.forceSimulation(nodes)
+        //        .force('charge', d3.forceManyBody().strength(5))
+        //        .force('center', d3.forceCenter(width / 2, height / 2))
+        //        .force('collision', d3.forceCollide().radius(function (d) {
+        //            return d.radius
+        //        }))
+        //        .on('tick', ticked);
+
+        //    function ticked() {
+        //        var u = d3.select('svg')
+        //            .selectAll('circle')
+        //            .data(nodes)
+
+        //        u.enter()
+        //            .append('circle')
+        //            .attr('r', function (d) {
+        //                return d.radius
+        //            })
+        //            .merge(u)
+        //            .attr('cx', function (d) {
+        //                return d.x
+        //            })
+        //            .attr('cy', function (d) {
+        //                return d.y
+        //            })
+
+        //        u.exit().remove()
+        //    }
+        //}
 
         function chart(selection) {
             //var data = selection.enter().data();
+            //create a new pack layout
+
+            //let forceCollide = d3.forceCollide().radius(d => d.r + 1);
+            //So spaces between circles after collide - add 1
+            let forceCollide = d3.forceCollide().radius(d => scaleRadius(d[columnForRadius]) + 1);
+
+            var pack = d3.pack()
+                .size([width, height])
+                .padding(1.5);
+
             var data = selection.datum();
             var div = selection,
                 svg = div.selectAll('svg');
             svg.attr('width', width).attr('height', height);
+            var colorCircles = d3.scaleOrdinal(d3.schemeCategory20c);
+            var scaleRadius = d3.scaleLinear().domain([d3.min(data, function (d) {
+                return +d[columnForRadius];
+            }), d3.max(data, function (d) {
+                return +d[columnForRadius];
+            })]).range([5, maxRadius])
 
             var tooltip = selection
                 .append("div")
@@ -58,51 +116,212 @@
                 .style("width", "400px")
                 .text("");
 
+                //Create a  hierarchy with the cirles as children 
+                //Calling sum lets the pack layout calculate the encircling circle
+                let root = d3.hierarchy({ children: data })
+                .sum(d => d[columnForRadius]);
 
-            var simulation = d3.forceSimulation(data)
-                .force("charge", d3.forceManyBody().strength(strength))
-                .force('collide', forceCollide)
-                //.force('center', d3.forceCenter(centerX, centerY))
-                .force("x", d3.forceX())
-                .force("y", d3.forceY())
-                .on("tick", ticked);
+                var simulation = d3.forceSimulation(data)
+                    .force("charge", d3.forceManyBody().strength(strength)) // - is Element repel each other.  First argument is user id
+                    //.force('collide', d3.forceCollide().radius(function (d) {
+                    //    return scaleRadius(d[columnForRadius]);
+                    //}))
+                    .force('collide',forceCollide)
+                    // .force('center', d3.forceCenter(centerX(), centerY())) // Attracts the elements towards a centre point
+                    .force('x', d3.forceX(centerX()).strength(strength))
+                    .force('y', d3.forceY(centerY()).strength(strength));
+                //.force("x", d3.forceX())
+                //.force("y", d3.forceY())
+                //.on("tick", ticked); // Each time the simulation iterates, this is called
+
+            
+            // Creates a  circle pack layout for the hierarch (in root).  This calculates a circle around the leave nodes
+            //
+            let nodes = pack(root).leaves().map(node => {
+                // console.log('node:', node.x, (node.x - centerX) * 2);
+                const data = node.data;
+                return {
+                    x: centerX() + (node.x - centerX()) * 3, // magnify start position to have transition to center movement
+                    y: centerY() + (node.y - centerY()) * 3,
+                    //r: 0, // for tweening
+                    //x: node.x,
+                    //y: node.r,
+                    r:0,
+                    //radius: node.r, //original radius
+                    radius: scaleRadius(data[columnForRadius]), //original radius
+                    level: data.level,
+                    category: data.category,
+                    value:data.value,
+                    //id: data.cat + '.' + (data.name.replace(/\s/g, '-')),
+                    //cat: data.cat,
+                    //name: data.name,
+                    //value: data.value,
+                    icon: data.icon,
+                    //desc: data.desc,
+                };
+            });
+            simulation.nodes(nodes).on('tick', ticked);
+
+            let node = svg.selectAll('.node')
+                .data(nodes)
+                .enter().append('g')
+                .attr('class', 'node')
+                .call(d3.drag()
+                    .on('start', (d) => {
+                        if (!d3.event.active) { simulation.alphaTarget(0.2).restart(); }
+                        d.fx = d.x;
+                        d.fy = d.y;
+                    })
+                    .on('drag', (d) => {
+                        d.fx = d3.event.x;
+                        d.fy = d3.event.y;
+                    })
+                    .on('end', (d) => {
+                        if (!d3.event.active) { simulation.alphaTarget(0); }
+                        d.fx = null;
+                        d.fy = null;
+                    }));
+
+            node.append('circle')
+                //.attr('id', d => d.id)
+                .attr('r', 0)
+                .style('fill', d => colorCircles(d[columnForColors]))
+                .transition().duration(2000).ease(d3.easeElasticOut)
+                .tween('circleIn', (d) => {
+                    let i = d3.interpolateNumber(0, d.radius);
+                    return (t) => {
+                        d.r = i(t);
+                        simulation.force('collide', forceCollide);
+                    };
+                });
+
+            //node.filter(d => String(d.icon).includes('img/'))
+                node.append('image')
+                .classed('node-icon', true)
+                //.attr('clip-path', d => `url(#clip-${d.id})`)
+                    .attr('xlink:href', d => `.\\content\\images\\${d.icon}`)
+                
+                .attr('x', d => -d.radius * 0.7)
+                .attr('y', d => -d.radius * 0.7)
+                .attr('height', d => d.radius * 2 * 0.7)
+                .attr('width', d => d.radius * 2 * 0.7);
 
             //var simulation = d3.forceSimulation()
-            //    // .force('link', d3.forceLink().id(d => d.id))
-            //    .force('charge', d3.forceManyBody())
-            //    //.force('collide', forceCollide)
+            //     //.force('link', d3.forceLink().id(d => d.id))
+            //    .force('charge', d3.forceManyBody().strength(strength))
+            //    .force('collide', forceCollide)
             //    // .force('center', d3.forceCenter(centerX, centerY))
-            //    .force('x', d3.forceX(centerX).strength(strength))
-            //    .force('y', d3.forceY(centerY).strength(strength));
+            //    //.force('x', d3.forceX(centerX).strength(strength))
+            //   // .force('y', d3.forceY(centerY).strength(strength))
+            //    .on("tick", ticked);
 
-            var colorCircles = d3.scaleOrdinal(d3.schemeCategory10);
-            var scaleRadius = d3.scaleLinear().domain([d3.min(data, function (d) {
-                return +d[columnForRadius];
-            }), d3.max(data, function (d) {
-                return +d[columnForRadius];
-            })]).range([5, 18])
+            
 
-            var node = svg.selectAll("circle")
-                .data(data)
-                .enter()
-                .append("circle")
-                .attr('r', function (d) {
-                    return scaleRadius(d[columnForRadius])
-                })
-                .style("fill", function (d) {
-                    //return colorCircles(d[columnForColors])
-                    return "red"
-                })
-                .attr('transform', 'translate(' + [width / 2, height / 2] + ')');
+            //console.log(centerX);
+
+            //var node = svg.selectAll("circle")
+            //    .data(nodes)
+            //    .enter()
+            //    .append("circle")
+            //    //.attr('r', function (d) {
+            //    //    return scaleRadius(d[columnForRadius])
+            //    //})
+            //    //.attr('r', function (d) {
+            //    //    return d.radius;
+            //    //})
+            //    .attr("r", 0)
+            //    .style("fill", function (d) {
+            //        //return colorCircles(d[columnForColors])
+            //        return "red"
+            //    })
+            //    //This makes the circle initially between 0 and a value less than the radius
+            //    .transition().duration(2000).ease(d3.easeElasticOut)
+            //    .tween('circleIn', (d) => {
+            //        //This is returns function with a parameter t which can vary beween 0 and 1
+            //        let i = d3.interpolateNumber(0, d.radius);
+            //        // t will be between 0 and 1
+            //        return (t) => {
+            //            // This should be between 0 and radius
+            //            d.r = i(t);
+            //            simulation.force('collide', forceCollide);
+            //        };
+            //    });
+            //    //.call(d3.drag()
+            //    //    .on('start', (d) => {
+            //    //        if (!d3.event.active) { simulation.alphaTarget(0.2).restart(); }
+            //    //        d.fx = d.x;
+            //    //        d.fy = d.y;
+            //    //    })
+            //    //    .on('drag', (d) => {
+            //    //        d.fx = d3.event.x;
+            //    //        d.fy = d3.event.y;
+            //    //    })
+            //    //    .on('end', (d) => {
+            //    //        if (!d3.event.active) { simulation.alphaTarget(0); }
+            //    //        d.fx = null;
+            //    //        d.fy = null;
+            //    //    }));;
 
 
             function ticked(e) {
-                node.attr("cx", function (d) {
-                    return d.x;
-                })
-                    .attr("cy", function (d) {
-                        return d.y;
-                    });
+                
+                   
+           // .attr('transform', 'translate(' + [centerX(), centerY()] + ')'); // all circles moved to center of container
+                //.transition().duration(2000).ease(d3.easeElasticOut);
+                //.transition().styleTween("fill", function () { return d3.interpolate("green", "red"); });
+                //.tween('circleIn', (d) => {
+                //    let i = d3.interpolateNumber(0, d.radius);
+                //    return (t) => {
+                //        d.r = i(t);
+                //        simulation.force('collide', forceCollide);
+                //    };
+                //});
+                //if (node != undefined) {
+                //    node.attr("cx", function (d) {
+                //        return d.x;
+                //    })
+                //        .attr("cy", function (d) {
+                //            return d.y;
+                //        });
+                //}
+                //node
+                //    .attr('transform', d => `translate(${d.x},${d.y})`)
+                //    .select('circle')
+                //    .attr('r', d => d.r);
+
+                //var u = svg
+                //    .selectAll('circle')
+                //    .data(data)
+
+                //u.enter()
+                //    .append('circle')
+                //    .attr('r', function (d) {
+                //        //return scaleRadius(d[columnForRadius])
+                //        return scaleRadius(d[columnForRadius]);
+                //    })
+                //    .merge(u)
+                //    .attr('cx', function (d) {
+                //        return d.x
+                //    })
+                //    .attr('cy', function (d) {
+                //        return d.y
+                //    })
+
+                //u.exit().remove()
+
+                node
+                    .attr('transform', d => `translate(${d.x},${d.y})`)
+                    .select('circle')
+                    .attr('r', d => d.r);
+            }
+
+            function centerX()
+            {
+                return width / 2;
+            }
+
+            function centerY() {
+                return height / 2;
             }
 
         }
@@ -209,26 +428,30 @@
             }
 
             var selection = d3.select('#chart').datum(data);
-           // var mydata = selection.enter().data();
+            // var mydata = selection.enter().data();
             //var mydata = selection.datum();
             //selection.select("svg")
             //    .selectAll("circle")
             //    .data(mydata)
             //    .enter()
             //    .append("circle");;
-            
-           
+
+
             //var div = d3.select("#chart")
             //    .select("svg")
             //    .selectAll("circle")
             //    .data(data)
             //    .enter()
             //    .append("circle");
-            createBubble(data);
-        });
 
-       
-       
+            createBubble(data);
+            //var numNodes = 20
+            //var nodes = d3.range(numNodes).map(function (d) {
+            //    return { level: Math.random() * 10 }
+            //});
+
+            //createBubble(nodes);
+        });
 
     }
 

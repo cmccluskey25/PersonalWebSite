@@ -1,46 +1,46 @@
-﻿skill,category,level
-.Net,Development,100
-c#,Development,100
-Webforms,Development,100
-MVC,Development,60
-SQL Server,Development,100
-Windows Services,Development,70
-nHibernate,Development,80
-OData,Development,30
-WCF,Development,50
-Linq To SQL,Development,50
-SimpleData,Development,30
-Dapper,Development,30
-CSS,Development,70
-NUnit,Development,80
-Sharp Architecture,Development,60
-TFS/VSTS,Development,100
-Visual Source Safe,Development,100
-Tortoise SVN,Development,100
-Scrumworks,Development,80
-Resharper,Development,100
-Infopath,Development,100
-Crystal Reports,Development,100
-Sharepoint,Development,80
-Visual Studio,Development,100
-SSIS,Development,50
-SSRS,Development,80
-Winforms,Development,100
-JQuery,Development,80
-JQuery UI,Development,60
-Web API,Development,50
-Javascript,Development,70
-AJAX,Development,80
-LINQ,Development,100
-HTML,Development,100
-OAuth,Development,50
-Entity Framework,Development,30
-Rhino Mocks,Development,60
-Umbraco,Development,10
-XML,Development,100
-Izenda Reporting,Development,80
-Subversion,Development,100
-Basecamp,Development,30
-Redgate Tools,Development,50
-PGP Encryption,Development,30
-Visual Basic 6,Development,100
+﻿skill,category,level,icon
+.Net,framework,100,visualStudio.png
+c#,language,100,visualStudio.png
+ASP.NET Webforms,framework,100,visualStudio.png
+ASP.NET MVC,framework,60,visualStudio.png
+SQL Server,backend,100,visualStudio.png
+Windows Services,application,70,visualStudio.png
+nHibernate,ORM,80,visualStudio.png
+WCF,framework,50,visualStudio.png
+Linq To SQL,ORM,50,visualStudio.png
+SimpleData,ORM,30,visualStudio.png
+Dapper,ORM,30,visualStudio.png
+NUnit,tooling,80,visualStudio.png
+Sharp Architecture,framework,60,visualStudio.png
+TFS/VSTS,tooling,100,visualStudio.png
+Visual Source Safe,tooling,100,visualStudio.png
+Tortoise SVN,tooling,100,visualStudio.png
+Scrumworks,tooling,80,visualStudio.png
+Resharper,tooling,100,visualStudio.png
+Infopath,application,100,visualStudio.png
+Crystal Reports,technology,100,visualStudio.png
+Sharepoint,technology,80,visualStudio.png
+Visual Studio,tooling,100,visualStudio.png
+SSIS,backend,50,visualStudio.png
+SSRS,backend,80,visualStudio.png
+Winforms,framework,100,visualStudio.png
+JQuery,library,80,visualStudio.png
+JQuery UI,library,60,visualStudio.png
+Web API,framework,50,visualStudio.png
+Javascript,language,70,visualStudio.png
+AJAX,technology,80,visualStudio.png
+LINQ,technology,100,visualStudio.png
+HTML,language,100,visualStudio.png
+CSS,language,70,visualStudio.png
+OAuth,protocol,50,visualStudio.png
+OData,protocol,50,visualStudio.png
+Entity Framework,ORM,30,visualStudio.png
+Rhino Mocks,tooling,60,visualStudio.png
+Umbraco,CMS,10,visualStudio.png
+XML,language,100,visualStudio.png
+Izenda Reporting,technology,80,visualStudio.png
+Subversion,tooling,100,visualStudio.png
+Basecamp,tooling,30,visualStudio.png
+Redgate Tools,tooling,50,visualStudio.png
+PGP Encryption,technology,30,visualStudio.png
+Visual Basic 6,legacy language,100,visualStudio.png
